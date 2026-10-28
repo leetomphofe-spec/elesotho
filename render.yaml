@@ -1,0 +1,35 @@
+# Render Blueprint: one web service (API + React app) and one PostgreSQL database.
+# In Render: New > Blueprint > pick this repository.
+databases:
+  - name: gov-services-db
+    plan: free
+    databaseName: govservices
+    user: govservices
+
+services:
+  - type: web
+    name: gov-services
+    runtime: node
+    plan: free
+    buildCommand: npm run build
+    startCommand: npm start
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_VERSION
+        value: "20"
+      - key: NODE_ENV
+        value: production
+      - key: DATABASE_URL
+        fromDatabase:
+          name: gov-services-db
+          property: connectionString
+      - key: JWT_SECRET
+        generateValue: true
+      - key: ADMIN_EMAIL
+        sync: false
+      - key: ADMIN_PASSWORD
+        sync: false
+      - key: SEED_DEMO
+        value: "true"
+      - key: SHOW_RESET_LINK
+        value: "true"

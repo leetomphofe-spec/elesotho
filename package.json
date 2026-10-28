@@ -1,0 +1,13 @@
+{
+  "name": "lesotho-gov-services",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Integrated Government Services System for Lesotho (React + Express + PostgreSQL)",
+  "engines": { "node": ">=20" },
+  "scripts": {
+    "build": "npm ci --prefix server && npm ci --prefix client --include=dev && npm run build --prefix client",
+    "start": "npm start --prefix server",
+    "dev:server": "npm run dev --prefix server",
+    "dev:client": "npm run dev --prefix client"
+  }
+}
